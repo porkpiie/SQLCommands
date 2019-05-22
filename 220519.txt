@@ -1,0 +1,17 @@
+select name from products where pid=(select pid from sales group by pid having count(*)=(select max(count(*)) from sales group by pid));
+select sid from subcategory where sid=(select sid from products group by sid having count(*)=(select max(count(*)) from products group by sid));
+
+SQL> create or replace procedure addition
+  2  is
+  3  A number(3);
+  4  B number(3);
+  5  C number(3);
+  6  begin
+  7  A:=15;
+  8  B:=20;
+  9  C:=A+B;
+ 10  dbms_output.put_line('The Result');
+ 11  dbms_output.put_line(C);
+ 12  end;
+ 13  /
+
