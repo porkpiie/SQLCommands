@@ -1,0 +1,29 @@
+  GNU nano 2.3.1              File: 230519.txt                        Modified  
+
+SQL> create or replace procedure tesco_entry(newItemCategory char, newItemSubca$
+  2  newItemCid number;
+  3  newItemSid number;
+  4  counter number;
+  5  begin
+  6  select count(*) into counter from category where description=newItemCatego$
+  7  if(counter=0)
+  8  then
+  9  select nvl(max(cid)+1,1) into newItemCid from category;
+ 10  insert into category values(newItemCid, newItemCategory);
+ 11  else
+ 12  select cid into newItemCid from category where description = newItemCatego$
+ 13  end if;
+ 14  select nvl(max(sid)+1,1) into newItemSid from subcategory where cid = newI$
+ 15  insert into subcategory values(newItemCid, newItemSid, newItemSubcategory);
+ 16  end;
+
+SQL> create or replace procedure catentry(cat char, sub char)
+  2  is
+  3  newcid number(3);
+  4  newsid number(3);
+  5  begin
+  6  select nvl(max(cid),0) into newcid from category where description=cat;
+
+^G Get Help  ^O WriteOut  ^R Read File ^Y Prev Page ^K Cut Text  ^C Cur Pos
+^X Exit      ^J Justify   ^W Where Is  ^V Next Page ^U UnCut Text^T To Spell
+
